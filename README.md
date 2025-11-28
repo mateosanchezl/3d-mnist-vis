@@ -22,19 +22,49 @@ Input Layer (784 voxels) → Hidden Layer 1 (128 neurons) → Hidden Layer 2 (64
 - **React Three Fiber** for declarative 3D rendering
 - **TensorFlow.js** for WebGL-accelerated machine learning
 - **Zustand** for high-performance state management
-- **Comlink** for Web Worker communication
 - **Vite** for fast development builds
 
 ## Getting Started
 
+### 1. Install dependencies
+
 ```bash
-# Install dependencies
 npm install
+```
 
-# Start development server
+### 2. Download MNIST Dataset
+
+The MNIST dataset must be downloaded separately. Create the data folder and download the files:
+
+```bash
+mkdir -p public/data
+cd public/data
+```
+
+Download these 4 files from the MNIST database or any mirror:
+
+| File                      | Description                      |
+| ------------------------- | -------------------------------- |
+| `train-images.idx3-ubyte` | Training images (60,000 samples) |
+| `train-labels.idx1-ubyte` | Training labels                  |
+| `t10k-images.idx3-ubyte`  | Test images (10,000 samples)     |
+| `t10k-labels.idx1-ubyte`  | Test labels                      |
+
+**Alternative download sources:**
+
+- [Kaggle MNIST](https://www.kaggle.com/datasets/hojjatk/mnist-dataset)
+
+If files are compressed (`.gz` or `.zip`), extract them first.
+
+### 3. Start development server
+
+```bash
 npm run dev
+```
 
-# Build for production
+### 4. Build for production
+
+```bash
 npm run build
 ```
 

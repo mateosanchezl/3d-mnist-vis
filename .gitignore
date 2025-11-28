@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# MNIST dataset (download separately)
+public/data/*.idx*-ubyte
+public/data/*.gz
+public/data/*.zip
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
