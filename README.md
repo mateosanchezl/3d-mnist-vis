@@ -1,5 +1,7 @@
 # 3D MNIST Neural Network Visualizer
 
+**DISCLAIMER** - As a fun test, I got Opus 4.5 to basically one-shot this whole project!
+
 An immersive 3D web application that reveals the inner workings of a deep neural network as it learns to recognize handwritten digits from the MNIST dataset.
 
 ## Features
