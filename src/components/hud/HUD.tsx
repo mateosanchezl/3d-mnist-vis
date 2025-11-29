@@ -50,7 +50,7 @@ export function HUD() {
 
       {/* GitHub Link */}
       <a
-        href="https://github.com/mateosanchezl/r3f-tfjs-nn-viz"
+        href="https://github.com/mateosanchezl/3d-mnist-vis"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.githubLink}

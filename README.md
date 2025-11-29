@@ -1,6 +1,6 @@
 # 3D MNIST Neural Network Visualizer
 
-**DISCLAIMER** - As a fun test, I got Claude Opus 4.5 to basically one-shot this whole project!
+**DISCLAIMER** - As a fun test, I got Opus 4.5 to basically one-shot this whole project!
 
 An immersive 3D web application that reveals the inner workings of a deep neural network as it learns to recognize handwritten digits from the MNIST dataset.
 
@@ -36,14 +36,14 @@ Input Layer (784 voxels) → Hidden Layer 1 (128 neurons) → Hidden Layer 2 (64
 
 ### Visual Encoding
 
-| Element | Meaning |
-|---------|---------|
-| **Cyan lines** | Positive weights |
-| **Magenta lines** | Negative weights |
-| **Line brightness** | Weight magnitude |
-| **Neuron glow** | Activation intensity |
-| **Green output** | Correct prediction |
-| **Red output** | Incorrect prediction |
+| Element             | Meaning              |
+| ------------------- | -------------------- |
+| **Cyan lines**      | Positive weights     |
+| **Magenta lines**   | Negative weights     |
+| **Line brightness** | Weight magnitude     |
+| **Neuron glow**     | Activation intensity |
+| **Green output**    | Correct prediction   |
+| **Red output**      | Incorrect prediction |
 
 ## Tech Stack
 
