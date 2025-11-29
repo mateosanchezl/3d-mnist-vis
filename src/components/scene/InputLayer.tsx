@@ -1,8 +1,8 @@
-import { useRef, useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
-import { getSnapshot, getAnimationState } from '../../store/networkStore';
-import { LAYER_POSITIONS, COLORS } from '../../types';
+import { useRef, useMemo } from "react";
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { getSnapshot, getAnimationState } from "../../store/networkStore";
+import { LAYER_POSITIONS } from "../../types";
 
 const GRID_SIZE = 28;
 const VOXEL_SIZE = 0.12;
@@ -13,12 +13,12 @@ export function InputLayer() {
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const tempObject = useMemo(() => new THREE.Object3D(), []);
   const tempColor = useMemo(() => new THREE.Color(), []);
-  
+
   // Pre-compute grid positions
   const positions = useMemo(() => {
     const pos: [number, number, number][] = [];
     const offset = (GRID_SIZE * VOXEL_SPACING) / 2;
-    
+
     for (let y = 0; y < GRID_SIZE; y++) {
       for (let x = 0; x < GRID_SIZE; x++) {
         pos.push([
@@ -31,67 +31,58 @@ export function InputLayer() {
     return pos;
   }, []);
 
-  // Create geometry and material
+  // Create geometry and material - use white base so instance colors show as true grayscale
   const geometry = useMemo(() => new THREE.BoxGeometry(VOXEL_SIZE, VOXEL_SIZE, VOXEL_SIZE), []);
   const material = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
-        color: COLORS.inputVoxel,
-        emissive: COLORS.inputVoxel,
-        emissiveIntensity: 0.3,
-        metalness: 0.3,
-        roughness: 0.7,
+        color: "#ffffff",
+        emissive: "#ffffff",
+        emissiveIntensity: 0.2,
+        metalness: 0.1,
+        roughness: 0.8,
       }),
     []
   );
 
   useFrame(() => {
     if (!meshRef.current) return;
-    
+
     const snapshot = getSnapshot();
     const animState = getAnimationState();
-    
+
     // Pulse effect during forward pass
-    const isActive = animState.phase === 'forward' && animState.layerProgress < 0.2;
+    const isActive = animState.phase === "forward" && animState.layerProgress < 0.2;
     const pulseIntensity = isActive ? 0.5 + 0.5 * Math.sin(animState.pulseTime * 10) : 0.3;
-    
+
     for (let i = 0; i < 784; i++) {
       const [x, y, z] = positions[i];
-      
-      // Get pixel intensity from snapshot or use default
+
+      // Get pixel intensity from snapshot or use default (0-1 range)
       const intensity = snapshot?.inputImage?.[i] ?? 0;
-      
-      // Scale height and brightness based on intensity
+
+      // Scale height based on intensity
       const height = VOXEL_SIZE + intensity * MAX_HEIGHT;
-      
+
       tempObject.position.set(x, y, z + height / 2);
       tempObject.scale.set(1, 1, 1 + intensity * 4);
       tempObject.updateMatrix();
-      
+
       meshRef.current.setMatrixAt(i, tempObject.matrix);
-      
-      // Set color based on intensity
-      const brightness = 0.2 + intensity * 0.8;
-      tempColor.setRGB(
-        brightness * 0.3 + pulseIntensity * intensity * 0.2,
-        brightness * 0.5 + pulseIntensity * intensity * 0.3,
-        brightness * 1.0
-      );
+
+      // Set color as grayscale based on pixel intensity (0 = black, 1 = white)
+      // Add a subtle pulse glow for active pixels during forward pass
+      const grayscale = intensity;
+      const glow = isActive ? pulseIntensity * intensity * 0.2 : 0;
+      tempColor.setRGB(grayscale + glow, grayscale + glow, grayscale + glow);
       meshRef.current.setColorAt(i, tempColor);
     }
-    
+
     meshRef.current.instanceMatrix.needsUpdate = true;
     if (meshRef.current.instanceColor) {
       meshRef.current.instanceColor.needsUpdate = true;
     }
   });
 
-  return (
-    <instancedMesh
-      ref={meshRef}
-      args={[geometry, material, 784]}
-      frustumCulled={false}
-    />
-  );
+  return <instancedMesh ref={meshRef} args={[geometry, material, 784]} frustumCulled={false} />;
 }
-

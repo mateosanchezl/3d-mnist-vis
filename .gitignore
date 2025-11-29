@@ -12,8 +12,7 @@ dist
 dist-ssr
 *.local
 
-# MNIST dataset (download separately)
-public/data/*.idx*-ubyte
+# MNIST dataset compressed files (uncompressed files are tracked)
 public/data/*.gz
 public/data/*.zip
 
