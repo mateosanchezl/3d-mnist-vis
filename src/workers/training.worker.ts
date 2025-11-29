@@ -20,7 +20,7 @@ let currentBatch = 0;
 
 const config: NetworkConfig = {
   inputSize: 784,
-  hiddenLayers: [64],
+  hiddenLayers: [128, 64],
   outputSize: 10,
 };
 
