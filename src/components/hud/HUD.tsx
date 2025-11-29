@@ -1,7 +1,7 @@
-import { TrainingControls } from './TrainingControls';
-import { HyperparameterPanel } from './HyperparameterPanel';
-import { MetricsDisplay } from './MetricsDisplay';
-import styles from './HUD.module.css';
+import { TrainingControls } from "./TrainingControls";
+import { HyperparameterPanel } from "./HyperparameterPanel";
+import { MetricsDisplay } from "./MetricsDisplay";
+import styles from "./HUD.module.css";
 
 export function HUD() {
   return (
@@ -11,18 +11,18 @@ export function HUD() {
         <h1 className={styles.title}>MNIST Neural Network</h1>
         <p className={styles.subtitle}>3D Visualizer</p>
       </div>
-      
+
       {/* Left Panel - Controls */}
       <div className={styles.leftPanel}>
         <TrainingControls />
         <HyperparameterPanel />
       </div>
-      
+
       {/* Right Panel - Metrics */}
       <div className={styles.rightPanel}>
         <MetricsDisplay />
       </div>
-      
+
       {/* Network Architecture Info */}
       <div className={styles.networkInfo}>
         <div className={styles.layerInfo}>
@@ -42,7 +42,7 @@ export function HUD() {
           <div className={styles.layerSize}>10</div>
         </div>
       </div>
-      
+
       {/* Controls Hint */}
       <div className={styles.controlsHint}>
         Drag to rotate • Scroll to zoom • Right-click to pan
@@ -69,4 +69,3 @@ export function HUD() {
     </div>
   );
 }
-

@@ -7,7 +7,7 @@
   bottom: 0;
   pointer-events: none;
   z-index: 100;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .leftPanel {
@@ -104,8 +104,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .statusText {
@@ -130,7 +135,7 @@
   border-radius: 8px;
   background: rgba(30, 30, 50, 0.8);
   color: #e0e0e0;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
@@ -468,4 +473,3 @@
 .githubText {
   letter-spacing: 0.5px;
 }
-
